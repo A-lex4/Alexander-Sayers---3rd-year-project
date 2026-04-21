@@ -1,0 +1,160 @@
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200);
+
+}
+
+void loop() {
+
+float x = 0;
+float y = 0;
+int centiseconds = 0;
+int seconds = 0;
+int minutes = 0;
+float n = 0;
+float m = 0;
+float p = 0;
+int q = 1;
+float r = 0;
+float f = 0;
+
+Serial.println("calibrating...");
+
+while(millis() <= 5000){
+
+  m = (11.140 * analogRead(A1)) / 1023;
+  n = n + m;
+  p = p + 1.000;
+  //Serial.print("n = ");
+  //Serial.println(n, 3);
+  //Serial.print("p = ");
+  //Serial.println(p, 3);
+  delay(100);
+}
+
+float normal = n / (p);
+
+if(q >=1, q--){
+  Serial.println("finished");
+  Serial.print("n = ");
+  Serial.println(n, 3);
+  Serial.print("p = ");
+  Serial.println(p, 3);
+  Serial.print("norm = ");
+  Serial.println(normal, 3);
+  delay(1000);
+}
+
+Serial.println("data follows;");
+
+f = analogRead(A1); //initialise f for exponential smoothing
+
+while(true){
+ 
+
+  static unsigned long prevMillis = 0;  // remembers last sample time
+
+  unsigned long now = millis();
+  if (now - prevMillis >= 100) {  // sample time
+    prevMillis = now;
+
+    int raw = analogRead(A0);
+
+    //basic
+    x = 5.000 * (raw) / 1023;
+    float travel = normal - (2.228 * x);
+
+    //deadband infill
+    int deadband = 1;
+    static int prev = analogRead(A0); 
+    float filtered = 0;
+
+    int delta = raw - prev;
+
+    if (abs(delta) <= deadband) { // check if jump is within deadband
+      filtered = prev; // ignore small jitter
+    }
+    else if (abs(delta) == 2) {     // infill middle value
+      filtered = prev + (delta / 2); // check sign
+    }
+    else {
+      filtered = raw;  // big jump, accept full change
+    }
+    prev = filtered;
+
+    float x1 = 5.000 * (filtered) / 1023;
+    float travel1 = normal - (2.228 * x1);
+
+    //exponential smoothing
+    float smoothing = 0.8; //smaller = more smoothing
+    f = smoothing * filtered + (1 - smoothing) * f;
+
+    //fix asymptotoic convergence issue
+    if (abs(f - filtered) < 0.5) {
+      f = filtered;
+    }
+    
+    float x2 = 5.000 * (f) / 1023;
+    float travel2 = normal - (2.228 * x2);
+
+
+    //prints readable time
+
+    //unsigned long totalCentiseconds = now / 10;
+    //unsigned long totalmilliseconds = now;
+    //int centiseconds = totalCentiseconds % 100;
+    //int milliseconds = totalmilliseconds % 1000;
+    //int seconds = (now / 1000) % 60;
+    //int minutes = now / 60000;
+
+    //if(minutes <= 9){
+      //Serial.print("0");
+    //}
+    
+    //Serial.print(minutes);
+    //Serial.print(":");
+
+    //if(seconds <= 9){
+      //Serial.print("0");
+    //}
+
+    //Serial.print(seconds);
+    //Serial.print(".");
+
+    //if(milliseconds == 0){    //changed from centiseconds
+      //Serial.print("000");
+    //} else{
+      //if(milliseconds <= 9){   //changed from centi
+        //Serial.print("00");
+      //} else{
+        //if(milliseconds <= 99){
+          //Serial.print("0");
+        //}
+      //}
+      //Serial.print(milliseconds);  //change from println if not pasting to google sheets
+      //Serial.print(",");
+    //}
+
+
+    //print the appropriate data streams to be plotted:
+
+    Serial.print(now);
+    Serial.print(",");
+
+    Serial.print(travel, 3);
+    Serial.print(",");
+
+    //Serial.print(travel1, 3);
+    //Serial.print(",");
+
+    Serial.print(travel2, 3);
+    Serial.println(",");
+
+
+
+  }
+
+
+}
+}
