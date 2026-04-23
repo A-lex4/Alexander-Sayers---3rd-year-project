@@ -1,3 +1,7 @@
+//All code in this RTC module testing program is third party and referenced in the stock header below:
+
+
+
 /*********
   Rui Santos & Sara Santos - Random Nerd Tutorials
   Complete instructions at https://RandomNerdTutorials.com/arduino-ds3231-real-time-clock/
