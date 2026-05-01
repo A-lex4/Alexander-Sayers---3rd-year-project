@@ -11,16 +11,16 @@ The file 'Arduino presaved SD datalogger' is one of the 'example projects' that 
 
 The file 'Arduino RTC basic testing' contains code taken from https://RandomNerdTutorials.com/arduino-ds3231-real-time-clock/ which was used to test the real time clock module.
 
-The file 'Arduino filter testing' contains the code used to generate figures _ in section 3.3 of the report, with the key functionality explained in figure_
+The file 'Arduino filter testing' contains the code used to generate figures 3.3.4, 3.3.5 in section 3.3 of the report, with the key functionality explained in figure 3.3.6
 The exponential smoothing algorithm used is given by yn = x+(1-)yn-1
 The code in it's current state has a bug where it can sometimes suffer from steady state error. This is being tested and addressed.
 The code contains AI generated snippets and these are marked
 
-The file 'Arduino SD card full program' contains the code used to write files to an SD card, such as that in figure_ in section 3.3 of the report.
+The file 'Arduino SD card full program' contains the code used to write files to an SD card, such as that in figure 3.3.7 in section 3.3 of the report.
 This code combines the functionality of the two previous files, and relevant lines are referenced from where they have been taken.
 The code contains AI generated snippets and these are marked
 
-The file 'MATLAB data presentation' contains the code that was used to generate all MATLAB graphs in the report (Figures ___)
+The file 'MATLAB data presentation' contains the code that was used to generate all MATLAB graphs in the report (Figures 3.3.4, 3.3.5, 4.6.2, 4.6.4)
 After downloading the MATLAB app, the code is run by simply pasting it into the editor and pressing the 'run' button.  The function of the code is explained in figure _
 To read data from a file, the user must set a filepath to the folder where they will keep .txt files with data in. 
 Once the filepath is set up, simply move the .txt data file into the folder and change line 3 to "rawdata = fileread("your_file.txt");"
