@@ -102,7 +102,7 @@ void loop () {
 
   while(millis() <= 5000){
 
-    currentVal = (11.140 * analogRead(A0)) / 1023;
+    currentVal = (10.850 * analogRead(A0)) / 1023;
     runningTotal = runningTotal + currentVal;
     count = count + 1.000;
     delay(100);
@@ -152,7 +152,7 @@ void loop () {
 
       //basic
       x = 5.000 * (raw) / 1023;
-      float travel = normal - (2.228 * x);
+      float travel = normal - (2.17 * x);
 
       //deadband infill section - AI helped debug the original code which was not working
       int deadband = 1;
@@ -173,7 +173,7 @@ void loop () {
       prev = filtered;
 
       float x1 = 5.000 * (filtered) / 1023;
-      float travel1 = normal - (2.228 * x1);
+      float travel1 = normal - (2.17 * x1);
 
       //exponential smoothing
       float smoothing = 0.8; //smaller = more smoothing
@@ -186,7 +186,7 @@ void loop () {
     
       //send unfiltered data for comparison
       float x2 = 5.000 * (f) / 1023;
-      float travel2 = normal - (2.228 * x2);
+      float travel2 = normal - (2.17 * x2);
 
       //calculate time based on initial RTC call
       unsigned long elapsedMillis = millis() - startMillis;
