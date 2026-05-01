@@ -67,7 +67,7 @@ while(true){
     x = 5.000 * (raw) / 1023;
     float travel = normal - (2.228 * x);
 
-    //deadband infill
+    //deadband infill section used generative AI to debug initial code which was not working
     int deadband = 1;
     static int prev = analogRead(A0); 
     float filtered = 0;
