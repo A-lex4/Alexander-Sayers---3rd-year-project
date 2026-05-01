@@ -1,11 +1,13 @@
 This is a full repository of code referenced in my 3rd year project report.
 
-There are 4 files in this repository, three marked 'Arduino' which are written in C++, and one marked 'MATLAB' which is written in Matlab code.
+There are 5 files in this repository, four marked 'Arduino' which are written in C++, and one marked 'MATLAB' which is written in Matlab code.
 
 To run arduino code, simply download the Arduino IDE, plug in the microcontroller, paste the code included in the relevant file, and press the run button in the IDE. 
 All sketches use the serial monitor, which can be accessed through the 'tools' menu in the IDE, to see printed messages used for debugging and data collection
 Some sketches use a different baud rate defined in the line "Serial.begin(9600);". Ensure that the serial monitor's rate matches the rate defined in the script, otherwise printed messages will not be readable
 Some sketches include external libraries. These can be installed by opening the library manager page in the IDE, and searching for the necessary library, then installing it.
+
+The file 'Arduino presaved SD datalogger' is one of the 'example projects' that comes preloaded in the Arduino IDE. It was used as inspiration at the start of the process for creating SD card writing capabilities in my code
 
 The file 'Arduino RTC basic testing' contains code taken from https://RandomNerdTutorials.com/arduino-ds3231-real-time-clock/ which was used to test the real time clock module.
 
