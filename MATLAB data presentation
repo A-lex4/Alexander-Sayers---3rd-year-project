@@ -1,0 +1,34 @@
+% Generative AI was used as a support and debugging tool to aid learning during the development of this MATLAB script
+
+rawdata = fileread("data4.txt");
+x = strfind(rawdata, 'data follows;');
+rawdata = rawdata(x+1 : end);
+parts = split(rawdata, ","); %use for comma delimiters
+data = str2double(parts);
+
+% The use of 'strides' to separate data was added by generative AI as the original solution did not work
+
+time = data(1:3:end); %change 2nd number for stride length (aka number of items per time period)
+signal1 = data(2:3:end); %see above
+signal2 = data(3:3:end);
+%signal3 = data(4:4:end);
+%signal_avg = movmean(signal, 3);
+length_signal = length(signal2); %needs to be the last value printed 
+time = time(1:length_signal);
+time = time / 1000;
+zero_line = zeros(size(time));
+
+plot(time,signal1, 'b');
+hold on;
+plot(time, signal2, 'r');
+hold on;
+%plot(time, signal3, 'r');
+%hold on;
+plot(time,zero_line, 'k--');
+grid on;
+grid minor;
+hold off;
+legend('Wheel height normalised output', 'Sensor debouncing & exponential smoothing', 'zero level');
+xlabel('Time (s)'), ylabel('delta H (cm)');
+title('Wheel height over time');
+fontsize(16,"points")
