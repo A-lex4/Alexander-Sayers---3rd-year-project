@@ -1,3 +1,5 @@
+// The following code was developed with partial help from generative AI as a debugging support tool. The dataflow and filter functions were original, with AI only being used to help in cases where the code didn't run/didn't run as expected.
+
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
